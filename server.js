@@ -19,8 +19,9 @@ app.get('/location', (request, response) => {
 });
 
 app.get('/weather', (request, response) => {
-    try{
+    try {
         const weather = request.query.weather;
+        debugger;
         const result = getWeather(weather);
         response.status(200).json(result);
     }
