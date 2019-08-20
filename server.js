@@ -56,10 +56,8 @@ function toWeather() {
     const data = daily.data;
 
     return [{
-        summary: data.summary,
-        temperatureHigh: data.temperatureHigh,
-        temperatureLow: data.temperatureLow,
-        precipProbability: data.precipProbability
+        time: data[0].time,
+        forecast: data[0].summary
     }];
 }
 
