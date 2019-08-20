@@ -21,12 +21,11 @@ app.get('/location', (request, response) => {
 app.get('/weather', (request, response) => {
     try {
         const weather = request.query.weather;
-        debugger;
         const result = getWeather(weather);
         response.status(200).json(result);
     }
     catch(err){
-        response.status(500).send('Sorry something went wrong, please try again');
+        response.status(500).send('Sorry something went wrong, please try again', request.query);
     }
 });
 
@@ -53,8 +52,9 @@ function toLocation() {
 }
 
 function toWeather() {
-    const data = daily.data;
     const daily = weatherData.daily;
+    const data = daily.data;
+
     return {
         summary: data.summary,
         temperatureHigh: data.temperatureHigh,
