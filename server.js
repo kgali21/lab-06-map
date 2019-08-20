@@ -16,12 +16,28 @@ app.get('/location', (request, response) => {
     catch(err) {
         response.status(500).send('Sorry something went wrong, please try again');
     }
-})
+});
+
+app.get('/weather', (request, response) => {
+    try{
+        const weather = request.query.weather;
+        const result = getWeather(weather);
+        response.status(200).json(result);
+    }
+    catch(err){
+        response.status(500).send('Sorry something went wrong, please try again');
+    }
+});
 
 const geoData = require('./data/geo.json');
+const weatherData = require('./data/darksky.json');
 
 function getLatitudeLongitude() {
     return toLocation(geoData);
+}
+
+function getWeather(){
+    return toWeather(weatherData);
 }
 
 function toLocation() {
@@ -32,6 +48,17 @@ function toLocation() {
         formatted_query: firstResult.formatted_address,
         latitude: geometry.location.lat,
         longitude: geometry.location.lng
+    };
+}
+
+function toWeather() {
+    const data = daily.data;
+    const daily = weatherData.daily;
+    return {
+        summary: data.summary,
+        temperatureHigh: data.temperatureHigh,
+        temperatureLow: data.temperatureLow,
+        precipProbability: data.precipProbability
     };
 }
 
