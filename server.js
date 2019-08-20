@@ -82,6 +82,10 @@ function toWeather() {
     {
         time: data[6].time,
         forecast: data[6].summary,
+    },
+    {
+        time: data[7].time,
+        forecast: data[7].summary,
     }
     ];
 }
