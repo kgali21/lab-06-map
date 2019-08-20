@@ -55,12 +55,12 @@ function toWeather() {
     const daily = weatherData.daily;
     const data = daily.data;
 
-    return {
+    return [{
         summary: data.summary,
         temperatureHigh: data.temperatureHigh,
         temperatureLow: data.temperatureLow,
         precipProbability: data.precipProbability
-    };
+    }];
 }
 
 app.listen(PORT, () => {
